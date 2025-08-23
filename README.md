@@ -1,6 +1,6 @@
 # Founder's Community Dev Trial
 
-Built an AI-powered Research Assistant built using **LangChain** and **OpenAI's GPT model**. The application enables users to efficiently interact with research papers by generating summaries, extracting citations and references, and answering specific queries related to the paper’s content.
+Built an AI-powered Research Assistant using **LangChain** and **OpenAI's GPT model**. The application enables users to efficiently interact with research papers by generating summaries, extracting citations and references, and answering specific queries related to the paper’s content.
 
 ## Features
 
@@ -21,7 +21,7 @@ To run this project locally, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/ai-powered-research-assistant.git
+   git clone https://github.com/avulaanirudhreddy/ai-powered-research-assistant.git
    cd ai-powered-research-assistant
 2. Install the required dependencies:
    ```bash
@@ -41,11 +41,6 @@ Visit http://localhost:8501 in your browser to access the app.
     <li>Answer queries: The model can answer any specific queries related to the content of the paper.</li>
 </ul>
 
-## Demo
-
-You can try the live demo of the application hosted on Streamlit Cloud:
-👉 https://ai-powered-research-assistant-2801.streamlit.app/
-
 ## Contributing
 
 <ol>
@@ -56,9 +51,6 @@ You can try the live demo of the application hosted on Streamlit Cloud:
     <li>Create a new Pull Request.</li>
 </ol>
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Acknowledgements
 
@@ -67,7 +59,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
     <li>LangChain for simplifying the process of building LLM-powered applications.</li>
     <li>Streamlit for easy deployment and sharing of web applications.</li>
 </ul>
-
-## Contact
-
-Feel free to reach out if you have any questions or feedback!

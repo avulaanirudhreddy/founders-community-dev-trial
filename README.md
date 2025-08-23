@@ -21,8 +21,8 @@ To run this project locally, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/avulaanirudhreddy/ai-powered-research-assistant.git
-   cd ai-powered-research-assistant
+   git clone https://github.com/avulaanirudhreddy/founders-community-dev-trial
+   cd founders-community-dev-trial
 2. Install the required dependencies:
    ```bash
    pip install -r requirements.txt

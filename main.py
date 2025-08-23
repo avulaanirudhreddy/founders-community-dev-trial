@@ -13,7 +13,7 @@ import streamlit as st
 
 load_dotenv()
 
-st.title('Founder's Commnity Dev Trial')
+st.title('Founder's Community Dev Trial')
 
 if "OPENAI_API_KEY" in st.secrets['secrets']:
     api_key = st.secrets['secrets']["OPENAI_API_KEY"]

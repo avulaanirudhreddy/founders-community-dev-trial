@@ -1,6 +1,6 @@
-# AI-Powered Research Assistant
+# Founder's Community Dev Trail
 
-This is an AI-powered Research Assistant built using **LangChain** and **OpenAI's GPT model**. The application enables users to efficiently interact with research papers by generating summaries, extracting citations and references, and answering specific queries related to the paper’s content.
+Built an AI-powered Research Assistant built using **LangChain** and **OpenAI's GPT model**. The application enables users to efficiently interact with research papers by generating summaries, extracting citations and references, and answering specific queries related to the paper’s content.
 
 ## Features
 

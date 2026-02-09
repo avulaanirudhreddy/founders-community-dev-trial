@@ -8,8 +8,8 @@ from dotenv import load_dotenv
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
-from langchain.prompts import PromptTemplate
 from langchain_core.prompts import PromptTemplate
+from langchain_core.output_parsers import StrOutputParser
 from langchain.schema.runnable import RunnableParallel
 from langchain_community.vectorstores import FAISS
 
@@ -26,7 +26,7 @@ st.set_page_config(
     layout="centered"
 )
 
-st.title("📚 AI-Powered Research Manager")
+st.title("AI-Powered Research Manager")
 
 # -------------------------------------------------
 # Load OpenAI API Key (Streamlit Cloud safe)
@@ -67,16 +67,13 @@ uploaded_file = st.file_uploader(
     type="pdf"
 )
 
-if uploaded_file is not None:
+if uploaded_file:
     st.info("Processing your PDF…")
 
     temp_pdf_path = "temp_uploaded.pdf"
     with open(temp_pdf_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
 
-    # -------------------------------------------------
-    # Load & split document
-    # -------------------------------------------------
     loader = PyPDFLoader(temp_pdf_path)
     documents = loader.load()
 
@@ -87,34 +84,23 @@ if uploaded_file is not None:
 
     split_docs = splitter.split_documents(documents)
 
-    # -------------------------------------------------
-    # Vector Store (FAISS)
-    # -------------------------------------------------
     vectorstore = FAISS.from_documents(split_docs, embeddings)
     retriever = vectorstore.as_retriever()
 
     full_document_text = "\n".join(
-        [doc.page_content for doc in documents]
+        doc.page_content for doc in documents
     )
 
     st.success("PDF processed successfully ✅")
 
-    # -------------------------------------------------
-    # User Query
-    # -------------------------------------------------
-    query = st.text_input(
-        "Ask a question about the research paper:"
-    )
+    query = st.text_input("Ask a question about the research paper:")
 
     if query:
         relevant_docs = retriever.get_relevant_documents(query)
         relevant_context = "\n".join(
-            [doc.page_content for doc in relevant_docs]
+            doc.page_content for doc in relevant_docs
         )
 
-        # -------------------------------------------------
-        # Prompt Templates
-        # -------------------------------------------------
         summary_prompt = PromptTemplate(
             template=(
                 "Given the following research paper, "
@@ -139,9 +125,6 @@ if uploaded_file is not None:
             input_variables=["query", "context"]
         )
 
-        # -------------------------------------------------
-        # Chains
-        # -------------------------------------------------
         summary_chain = summary_prompt | model | parser
         citation_chain = citation_prompt | model | parser
         qa_chain = qa_prompt | model | parser
@@ -152,9 +135,6 @@ if uploaded_file is not None:
             "answer": qa_chain
         })
 
-        # -------------------------------------------------
-        # Run chains
-        # -------------------------------------------------
         with st.spinner("Generating insights…"):
             results = parallel_chain.invoke({
                 "context": full_document_text,
@@ -165,9 +145,6 @@ if uploaded_file is not None:
                 }
             })
 
-        # -------------------------------------------------
-        # Display results
-        # -------------------------------------------------
         st.subheader("📄 Research Paper Summary")
         st.write(results["summary"])
 

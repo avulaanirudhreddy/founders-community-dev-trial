@@ -85,7 +85,7 @@ if uploaded_file:
         chunk_overlap=50
     )
 
-    split_docs = splitter.split_documents(documents)
+    split_docs = splitter.split_documents(documents)[:20]
 
     # -------------------------------------------------
     # Vector Store (FAISS)
